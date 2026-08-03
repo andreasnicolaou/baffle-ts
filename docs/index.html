@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>baffle-ts demo</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%23d7ff74'/%3E%3Ctext%20x='16'%20y='24'%20font-family='system-ui,sans-serif'%20font-size='22'%20font-weight='700'%20text-anchor='middle'%20fill='%23171a15'%3EB%3C/text%3E%3C/svg%3E"
+    />
     <style>
       :root {
         color-scheme: dark;
@@ -162,7 +166,7 @@ await title.reveal(900);</code></pre>
         </p>
 
         <h3>Browser</h3>
-        <pre><code>&lt;script src="https://unpkg.com/baffle-ts/dist/index.umd.min.js"&gt;&lt;/script&gt;
+        <pre><code>&lt;script src="https://unpkg.com/baffle-ts@latest/dist/index.umd.min.js"&gt;&lt;/script&gt;
 &lt;script&gt;
   const title = Baffle.baffle(".headline");
   title.start();
@@ -212,7 +216,7 @@ await title.reveal(900);</code></pre>
     </main>
 
     <script type="module">
-      import { baffle } from '../dist/index.js';
+      import { baffle } from 'https://unpkg.com/baffle-ts@latest/dist/index.js';
 
       const headline = baffle('[data-demo]', {
         characters: '#%&*+-=?@<>/\\{}[]()!',

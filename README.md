@@ -66,14 +66,14 @@ The demo is hosted on GitHub Pages:
 
 **[andreasnicolaou.github.io/baffle-ts](https://andreasnicolaou.github.io/baffle-ts/)**
 
-You can also run `npm run build`, serve the repository root with any static file server, and open [`docs/index.html`](./docs/index.html).
+You can also serve [`docs/`](./docs) with any static file server and open [`docs/index.html`](./docs/index.html). The demo loads baffle-ts from the CDN, so no local build is required.
 
 ### Browser Usage
 
 ```html
 <h1 data-headline>baffle-ts</h1>
 
-<script src="https://unpkg.com/baffle-ts/dist/index.umd.min.js"></script>
+<script src="https://unpkg.com/baffle-ts@latest/dist/index.umd.min.js"></script>
 <script>
   const title = Baffle.baffle('[data-headline]');
   title.start();
