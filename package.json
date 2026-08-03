@@ -1,0 +1,117 @@
+{
+  "name": "baffle-ts",
+  "version": "1.0.0",
+  "description": "A tiny dependency-free TypeScript library for obfuscating and revealing DOM text. A modern TypeScript successor to the archived baffle.js.",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
+  "browser": "dist/index.umd.js",
+  "private": false,
+  "types": "dist/index.d.ts",
+  "type": "module",
+  "unpkg": "dist/index.umd.min.js",
+  "jsdelivr": "dist/index.umd.min.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "docs",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "clean": "rimraf dist",
+    "build": "npm run clean && tsc -p tsconfig.build.json && rollup -c && rimraf dist/esm dist/types",
+    "build:check": "npm run build && npm run test:bundle",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "format:check:hook": "npm run format:check",
+    "test:bundle": "npx bundlewatch",
+    "check": "npm run lint && npm run format:check && npm run test && npm run build:check",
+    "prepublishOnly": "npm run build:check"
+  },
+  "bundlewatch": {
+    "files": [
+      {
+        "path": "dist/index.js",
+        "maxSize": "1.6kB"
+      },
+      {
+        "path": "dist/index.cjs",
+        "maxSize": "1.6kB"
+      },
+      {
+        "path": "dist/index.umd.js",
+        "maxSize": "3.2kB"
+      },
+      {
+        "path": "dist/index.umd.min.js",
+        "maxSize": "1.7kB"
+      }
+    ]
+  },
+  "keywords": [
+    "baffle",
+    "baffle-ts",
+    "baffle.js",
+    "scramble",
+    "obfuscate",
+    "reveal",
+    "text",
+    "typescript",
+    "dom",
+    "animation",
+    "effect",
+    "esm",
+    "cjs",
+    "umd",
+    "browser",
+    "andreasnicolaou"
+  ],
+  "homepage": "https://andreasnicolaou.github.io/baffle-ts/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/andreasnicolaou/baffle-ts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andreasnicolaou/baffle-ts/issues"
+  },
+  "author": {
+    "name": "Andreas Nicolaou",
+    "email": "anicolaou66@gmail.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@rollup/plugin-terser": "^1.0.0",
+    "@types/node": "^26.1.2",
+    "@vitest/coverage-v8": "^4.1.10",
+    "bundlewatch": "^0.4.2",
+    "eslint": "^10.8.0",
+    "globals": "^17.9.0",
+    "jsdom": "^30.0.1",
+    "prettier": "^3.9.6",
+    "rimraf": "^6.1.3",
+    "rollup": "^4.62.4",
+    "rollup-plugin-dts": "^6.4.1",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "axios": "^1.12.0"
+  }
+}

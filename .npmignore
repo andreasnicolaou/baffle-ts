@@ -1,0 +1,25 @@
+# Source and tests
+src
+test
+
+# Local dependencies and generated reports
+node_modules
+coverage
+*.log
+
+# Build and tool configuration
+.github
+.husky
+.vscode
+eslint.config.js
+rollup.config.mjs
+tsconfig.json
+tsconfig.build.json
+vitest.config.ts
+
+# Formatting and editor config
+.prettierignore
+.prettierrc.json
+
+# Lockfiles are not needed in the npm package
+package-lock.json

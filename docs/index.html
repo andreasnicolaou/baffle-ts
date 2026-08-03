@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>baffle-ts demo</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          'Segoe UI',
+          sans-serif;
+        background: #101211;
+        color: #f5f0e8;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 56px 32px;
+      }
+
+      main {
+        width: min(720px, 100%);
+        margin: 0 auto;
+      }
+
+      h1 {
+        min-height: 1.2em;
+        margin: 0 0 18px;
+        font-size: clamp(42px, 9vw, 92px);
+        font-weight: 760;
+        letter-spacing: 0;
+        line-height: 0.96;
+      }
+
+      p {
+        max-width: 52ch;
+        margin: 0 0 28px;
+        color: #b7c8bd;
+        font-size: 18px;
+        line-height: 1.6;
+      }
+
+      button {
+        min-height: 44px;
+        border: 1px solid #d7ff74;
+        border-radius: 6px;
+        background: #d7ff74;
+        color: #171a15;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 700;
+        padding: 0 18px;
+      }
+
+      button:hover {
+        background: #ecffb0;
+      }
+
+      section {
+        margin-top: 72px;
+        padding-top: 32px;
+        border-top: 1px solid #2a302c;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 22px;
+        letter-spacing: 0;
+      }
+
+      h3 {
+        margin: 28px 0 10px;
+        color: #d7ff74;
+        font-size: 14px;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      pre {
+        overflow-x: auto;
+        margin: 0 0 18px;
+        border: 1px solid #2a302c;
+        border-radius: 8px;
+        background: #171a18;
+        padding: 16px;
+      }
+
+      code {
+        color: #f5f0e8;
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+      }
+
+      dl {
+        display: grid;
+        grid-template-columns: minmax(96px, 140px) 1fr;
+        gap: 10px 18px;
+        margin: 0;
+      }
+
+      dt {
+        color: #f5f0e8;
+        font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+        font-size: 14px;
+      }
+
+      dd {
+        margin: 0;
+        color: #b7c8bd;
+        line-height: 1.5;
+      }
+
+      @media (max-width: 560px) {
+        dl {
+          grid-template-columns: 1fr;
+        }
+
+        dd {
+          margin-bottom: 8px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1 data-demo aria-label="baffle-ts">baffle-ts</h1>
+      <p>
+        A dependency-free TypeScript text obfuscation effect for ESM, CommonJS, and browser scripts. Driven by
+        requestAnimationFrame and respectful of <code>prefers-reduced-motion</code>.
+      </p>
+      <button type="button">Replay reveal</button>
+
+      <section aria-labelledby="quick-start">
+        <h2 id="quick-start">Quick start</h2>
+        <h3>Install</h3>
+        <pre><code>npm install baffle-ts</code></pre>
+
+        <h3>ESM</h3>
+        <pre><code>import { baffle } from "baffle-ts";
+
+const title = baffle(".headline", {
+  characters: "#%&amp;*+-=?@",
+  speed: 45,
+});
+
+title.start();
+await title.reveal(900);</code></pre>
+        <p>
+          <code>baffle()</code> is the convenience factory. Import <code>Baffle</code> and use
+          <code>new Baffle(target, options)</code> when direct construction fits your code better.
+        </p>
+
+        <h3>Browser</h3>
+        <pre><code>&lt;script src="https://unpkg.com/baffle-ts/dist/index.umd.min.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  const title = Baffle.baffle(".headline");
+  title.start();
+  title.reveal(900);
+&lt;/script&gt;</code></pre>
+
+        <h3>API</h3>
+        <dl>
+          <dt>start()</dt>
+          <dd>Starts repeatedly obfuscating the selected text.</dd>
+          <dt>reveal(ms)</dt>
+          <dd>Reveals the managed text over a duration and resolves once it finishes or is stopped.</dd>
+          <dt>stop()</dt>
+          <dd>Stops any active animation without revealing.</dd>
+          <dt>once()</dt>
+          <dd>Obfuscates the managed text once.</dd>
+          <dt>set(options)</dt>
+          <dd>Updates options, including while an animation is running.</dd>
+          <dt>text(value)</dt>
+          <dd>Replaces the text managed by the instance.</dd>
+          <dt>refresh()</dt>
+          <dd>Uses the element's current DOM text as the managed text.</dd>
+          <dt>destroy()</dt>
+          <dd>Stops animation and restores the original text.</dd>
+        </dl>
+      </section>
+
+      <section aria-labelledby="framework-use">
+        <h2 id="framework-use">Framework use</h2>
+        <p>
+          Works with React, Vue, Angular, Svelte, and other browser frameworks. Create an instance after its target
+          mounts, then call <code>destroy()</code> when the owning component unmounts.
+        </p>
+        <p>
+          For server-rendered apps, initialize on the client. Baffle updates <code>textContent</code> directly, so avoid
+          rendering competing text into the animated element until the effect is finished or destroyed.
+        </p>
+      </section>
+
+      <section aria-labelledby="accessibility">
+        <h2 id="accessibility">Accessibility</h2>
+        <p>
+          With <code>prefers-reduced-motion: reduce</code>, baffle-ts leaves text readable and resolves reveals
+          immediately. Pass <code>respectReducedMotion: false</code> only when that behavior is intentionally needed.
+        </p>
+      </section>
+    </main>
+
+    <script type="module">
+      import { baffle } from '../dist/index.js';
+
+      const headline = baffle('[data-demo]', {
+        characters: '#%&*+-=?@<>/\\{}[]()!',
+        speed: 38,
+      });
+      let replayTimeout;
+
+      const replay = () => {
+        window.clearTimeout(replayTimeout);
+        headline.start();
+        replayTimeout = window.setTimeout(() => {
+          headline.reveal(900);
+        }, 260);
+      };
+
+      document.querySelector('button').addEventListener('click', replay);
+      replay();
+    </script>
+  </body>
+</html>
